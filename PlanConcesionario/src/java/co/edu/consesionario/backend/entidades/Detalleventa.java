@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.concesionario.backend.entidades;
+package co.edu.consesionario.backend.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,15 +27,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "detalleventas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DetalleVenta.findAll", query = "SELECT d FROM DetalleVenta d"),
-    @NamedQuery(name = "DetalleVenta.findByIddetalleVenta", query = "SELECT d FROM DetalleVenta d WHERE d.iddetalleVenta = :iddetalleVenta"),
-    @NamedQuery(name = "DetalleVenta.findByCantidad", query = "SELECT d FROM DetalleVenta d WHERE d.cantidad = :cantidad")})
-public class DetalleVenta implements Serializable {
+    @NamedQuery(name = "Detalleventa.findAll", query = "SELECT d FROM Detalleventa d"),
+    @NamedQuery(name = "Detalleventa.findByIddetalleVenta", query = "SELECT d FROM Detalleventa d WHERE d.iddetalleVenta = :iddetalleVenta"),
+    @NamedQuery(name = "Detalleventa.findByCantidad", query = "SELECT d FROM Detalleventa d WHERE d.cantidad = :cantidad")})
+public class Detalleventa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "iddetalleVenta")
     private Integer iddetalleVenta;
     @Column(name = "cantidad")
@@ -48,10 +47,10 @@ public class DetalleVenta implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Venta idVenta;
 
-    public DetalleVenta() {
+    public Detalleventa() {
     }
 
-    public DetalleVenta(Integer iddetalleVenta) {
+    public Detalleventa(Integer iddetalleVenta) {
         this.iddetalleVenta = iddetalleVenta;
     }
 
@@ -97,10 +96,10 @@ public class DetalleVenta implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DetalleVenta)) {
+        if (!(object instanceof Detalleventa)) {
             return false;
         }
-        DetalleVenta other = (DetalleVenta) object;
+        Detalleventa other = (Detalleventa) object;
         if ((this.iddetalleVenta == null && other.iddetalleVenta != null) || (this.iddetalleVenta != null && !this.iddetalleVenta.equals(other.iddetalleVenta))) {
             return false;
         }
@@ -109,7 +108,7 @@ public class DetalleVenta implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.concesionario.backend.entidades.DetalleVenta[ iddetalleVenta=" + iddetalleVenta + " ]";
+        return "co.edu.consesionario.backend.entidades.Detalleventa[ iddetalleVenta=" + iddetalleVenta + " ]";
     }
     
 }

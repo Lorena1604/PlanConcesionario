@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.concesionario.backend.entidades;
+package co.edu.consesionario.backend.entidades;
 
 import java.io.Serializable;
 import java.util.List;
@@ -52,7 +52,7 @@ public class Venta implements Serializable {
     @Column(name = "total")
     private Double total;
     @OneToMany(mappedBy = "idVenta", fetch = FetchType.EAGER)
-    private List<DetalleVenta> detalleVentaList;
+    private List<Detalleventa> detalleventaList;
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Cliente idCliente;
@@ -94,12 +94,12 @@ public class Venta implements Serializable {
     }
 
     @XmlTransient
-    public List<DetalleVenta> getDetalleVentaList() {
-        return detalleVentaList;
+    public List<Detalleventa> getDetalleventaList() {
+        return detalleventaList;
     }
 
-    public void setDetalleVentaList(List<DetalleVenta> detalleVentaList) {
-        this.detalleVentaList = detalleVentaList;
+    public void setDetalleventaList(List<Detalleventa> detalleventaList) {
+        this.detalleventaList = detalleventaList;
     }
 
     public Cliente getIdCliente() {
@@ -132,7 +132,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.concesionario.backend.entidades.Venta[ idVenta=" + idVenta + " ]";
+        return "co.edu.consesionario.backend.entidades.Venta[ idVenta=" + idVenta + " ]";
     }
     
 }

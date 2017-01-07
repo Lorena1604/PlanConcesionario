@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.concesionario.backend.entidades;
+package co.edu.consesionario.backend.entidades;
 
 import java.io.Serializable;
 import java.util.List;
@@ -66,10 +66,10 @@ public class Vehiculo implements Serializable {
     @Column(name = "precio")
     private double precio;
     @OneToMany(mappedBy = "codigoVehiculo", fetch = FetchType.EAGER)
-    private List<DetalleVenta> detalleVentaList;
-    @JoinColumn(name = "idConsesionario", referencedColumnName = "idConcesionario")
+    private List<Detalleventa> detalleventaList;
+    @JoinColumn(name = "nitConsesionario", referencedColumnName = "nit")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Concesionario idConsesionario;
+    private Consesionario nitConsesionario;
     @JoinColumn(name = "idEstado", referencedColumnName = "idEstado")
     @ManyToOne(fetch = FetchType.EAGER)
     private Estado idEstado;
@@ -130,20 +130,20 @@ public class Vehiculo implements Serializable {
     }
 
     @XmlTransient
-    public List<DetalleVenta> getDetalleVentaList() {
-        return detalleVentaList;
+    public List<Detalleventa> getDetalleventaList() {
+        return detalleventaList;
     }
 
-    public void setDetalleVentaList(List<DetalleVenta> detalleVentaList) {
-        this.detalleVentaList = detalleVentaList;
+    public void setDetalleventaList(List<Detalleventa> detalleventaList) {
+        this.detalleventaList = detalleventaList;
     }
 
-    public Concesionario getIdConsesionario() {
-        return idConsesionario;
+    public Consesionario getNitConsesionario() {
+        return nitConsesionario;
     }
 
-    public void setIdConsesionario(Concesionario idConsesionario) {
-        this.idConsesionario = idConsesionario;
+    public void setNitConsesionario(Consesionario nitConsesionario) {
+        this.nitConsesionario = nitConsesionario;
     }
 
     public Estado getIdEstado() {
@@ -176,7 +176,7 @@ public class Vehiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.concesionario.backend.entidades.Vehiculo[ codigoVehiculo=" + codigoVehiculo + " ]";
+        return "co.edu.consesionario.backend.entidades.Vehiculo[ codigoVehiculo=" + codigoVehiculo + " ]";
     }
     
 }

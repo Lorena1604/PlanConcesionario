@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.concesionario.backend.facade;
+package co.edu.consesionario.backend.facade;
 
-import co.edu.concesionario.backend.entidades.Cliente;
+import co.edu.consesionario.backend.entidades.Cliente;
 import java.util.List;
 import javax.ejb.Local;
 
