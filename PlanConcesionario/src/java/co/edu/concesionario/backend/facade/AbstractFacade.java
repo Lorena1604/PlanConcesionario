@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.consesionario.backend.facade;
+package co.edu.concesionario.backend.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;

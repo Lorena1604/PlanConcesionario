@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.consesionario.backend.facade;
+package co.edu.concesionario.backend.facade;
 
-import co.edu.consesionario.backend.entidades.Consesionario;
+import co.edu.concesionario.backend.entidades.Concesionario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Administrador
  */
 @Stateless
-public class ConsesionarioFacade extends AbstractFacade<Consesionario> implements ConsesionarioFacadeLocal {
+public class ConcesionarioFacade extends AbstractFacade<Concesionario> implements ConcesionarioFacadeLocal {
 
     @PersistenceContext(unitName = "PlanConcesionarioPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class ConsesionarioFacade extends AbstractFacade<Consesionario> implement
         return em;
     }
 
-    public ConsesionarioFacade() {
-        super(Consesionario.class);
+    public ConcesionarioFacade() {
+        super(Concesionario.class);
     }
     
 }

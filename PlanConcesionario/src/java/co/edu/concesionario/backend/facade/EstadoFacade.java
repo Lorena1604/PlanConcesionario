@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.consesionario.backend.facade;
+package co.edu.concesionario.backend.facade;
 
-import co.edu.consesionario.backend.entidades.Estado;
+import co.edu.concesionario.backend.entidades.Estado;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
