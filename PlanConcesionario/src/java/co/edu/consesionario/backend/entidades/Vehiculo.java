@@ -6,7 +6,6 @@
 package co.edu.consesionario.backend.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,12 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -59,19 +56,18 @@ public class Vehiculo implements Serializable {
     private String marca;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 95)
     @Column(name = "modelo")
-    private int modelo;
+    private String modelo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "precio")
-    private double precio;
-    @OneToMany(mappedBy = "codigoVehiculo", fetch = FetchType.EAGER)
-    private List<DetalleVenta> detalleVentaList;
+    private long precio;
     @JoinColumn(name = "idConcesionario", referencedColumnName = "idConcesionario")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Concesionario idConcesionario;
     @JoinColumn(name = "idEstado", referencedColumnName = "idEstado")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Estado idEstado;
 
     public Vehiculo() {
@@ -81,7 +77,7 @@ public class Vehiculo implements Serializable {
         this.codigoVehiculo = codigoVehiculo;
     }
 
-    public Vehiculo(Integer codigoVehiculo, String placa, String marca, int modelo, double precio) {
+    public Vehiculo(Integer codigoVehiculo, String placa, String marca, String modelo, long precio) {
         this.codigoVehiculo = codigoVehiculo;
         this.placa = placa;
         this.marca = marca;
@@ -113,29 +109,20 @@ public class Vehiculo implements Serializable {
         this.marca = marca;
     }
 
-    public int getModelo() {
+    public String getModelo() {
         return modelo;
     }
 
-    public void setModelo(int modelo) {
+    public void setModelo(String modelo) {
         this.modelo = modelo;
     }
 
-    public double getPrecio() {
+    public long getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(long precio) {
         this.precio = precio;
-    }
-
-    @XmlTransient
-    public List<DetalleVenta> getDetalleVentaList() {
-        return detalleVentaList;
-    }
-
-    public void setDetalleVentaList(List<DetalleVenta> detalleVentaList) {
-        this.detalleVentaList = detalleVentaList;
     }
 
     public Concesionario getIdConcesionario() {

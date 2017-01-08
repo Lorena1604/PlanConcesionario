@@ -1,0 +1,13 @@
+body{
+    background-image: url("../../img/fondo.jpg");
+    background-attachment: fixed;
+    color: #ffffff;
+}
+
+.titulo{
+    text-align: center;
+    
+}
+.iniciarSesion{
+    margin-top: 7%;
+}
