@@ -6,9 +6,7 @@
 package co.edu.consesionario.backend.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,12 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -52,18 +48,19 @@ public class Concesionario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "nit")
-    private int nit;
+    private long nit;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 25)
-    @Column(name = "telefono")
-    private String telefono;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 25)
+    @Column(name = "telefono")
+    private int telefono;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 85)
     @Column(name = "direccion")
     private String direccion;
     @Basic(optional = false)
@@ -74,8 +71,6 @@ public class Concesionario implements Serializable {
     @JoinColumn(name = "tipoUsuario", referencedColumnName = "idtipoUsuario")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private TipoUsuario tipoUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConcesionario", fetch = FetchType.EAGER)
-    private List<Vehiculo> vehiculoList;
 
     public Concesionario() {
     }
@@ -84,10 +79,11 @@ public class Concesionario implements Serializable {
         this.idConcesionario = idConcesionario;
     }
 
-    public Concesionario(Integer idConcesionario, int nit, String nombre, String direccion, String contrasena) {
+    public Concesionario(Integer idConcesionario, long nit, String nombre, int telefono, String direccion, String contrasena) {
         this.idConcesionario = idConcesionario;
         this.nit = nit;
         this.nombre = nombre;
+        this.telefono = telefono;
         this.direccion = direccion;
         this.contrasena = contrasena;
     }
@@ -100,11 +96,11 @@ public class Concesionario implements Serializable {
         this.idConcesionario = idConcesionario;
     }
 
-    public int getNit() {
+    public long getNit() {
         return nit;
     }
 
-    public void setNit(int nit) {
+    public void setNit(long nit) {
         this.nit = nit;
     }
 
@@ -116,11 +112,11 @@ public class Concesionario implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
@@ -146,15 +142,6 @@ public class Concesionario implements Serializable {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }
-
-    @XmlTransient
-    public List<Vehiculo> getVehiculoList() {
-        return vehiculoList;
-    }
-
-    public void setVehiculoList(List<Vehiculo> vehiculoList) {
-        this.vehiculoList = vehiculoList;
     }
 
     @Override

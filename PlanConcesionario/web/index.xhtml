@@ -17,14 +17,14 @@
                 <p:messages autoUpdate="true" showDetail="true"/>
                 <h:panelGrid columns="2">
                     <p:outputLabel for="txtUsuario" value="Usuario"/>
-                    <p:inputText id="txtUsuario" required="true" placeholder="NIT o Identificación"
-                                 requiredMessage="El usuario es requerido" maxlength="10"/>
+                    <p:inputText id="txtUsuario" value="#{iniciarSesionControlador.usuario}" required="true" placeholder="NIT o Identificación"
+                                 requiredMessage="El usuario es requerido" maxlength="15"/>
 
                     <p:outputLabel for="txtClave" value="Contraseña"/>
-                    <p:password id="txtClave" required="true" requiredMessage="La contraseña es requerida"/>
+                    <p:password id="txtClave" value="#{iniciarSesionControlador.contrasenaU}" required="true" requiredMessage="La contraseña es requerida"/>
 
                     <h:column />
-                    <p:commandButton value="Ingresar"/>
+                    <p:commandButton action="#{iniciarSesionControlador.iniciarSesion()}" value="Ingresar"/>
                     <!--<h:commandButton value="Iniciar Sesión" action="Views/bienvenido.xhtml"/>-->
                 </h:panelGrid>
                                  

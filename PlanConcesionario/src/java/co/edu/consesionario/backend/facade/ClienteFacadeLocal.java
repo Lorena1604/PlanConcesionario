@@ -30,4 +30,6 @@ public interface ClienteFacadeLocal {
 
     int count();
     
+    Cliente validarCliente(Cliente clienteRegistrado);
+    
 }

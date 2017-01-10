@@ -6,9 +6,7 @@
 package co.edu.consesionario.backend.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,12 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,16 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente"),
     @NamedQuery(name = "Cliente.findByCedula", query = "SELECT c FROM Cliente c WHERE c.cedula = :cedula"),
     @NamedQuery(name = "Cliente.findByNombre", query = "SELECT c FROM Cliente c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Cliente.findByApellidos", query = "SELECT c FROM Cliente c WHERE c.apellidos = :apellidos"),
     @NamedQuery(name = "Cliente.findByTelefono", query = "SELECT c FROM Cliente c WHERE c.telefono = :telefono"),
     @NamedQuery(name = "Cliente.findByDireccion", query = "SELECT c FROM Cliente c WHERE c.direccion = :direccion"),
     @NamedQuery(name = "Cliente.findByContrasena", query = "SELECT c FROM Cliente c WHERE c.contrasena = :contrasena")})
 public class Cliente implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "apellidos")
-    private String apellidos;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,25 +46,34 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "idCliente")
     private Integer idCliente;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "cedula")
-    private String cedula;
-    @Size(max = 45)
+    private long cedula;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "apellidos")
+    private String apellidos;
     @Column(name = "telefono")
-    private String telefono;
-    @Size(max = 45)
+    private Integer telefono;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 75)
     @Column(name = "direccion")
     private String direccion;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "contrasena")
     private String contrasena;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.EAGER)
-    private List<Venta> ventaList;
     @JoinColumn(name = "tipo", referencedColumnName = "idtipoUsuario")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private TipoUsuario tipo;
 
     public Cliente() {
@@ -81,6 +81,15 @@ public class Cliente implements Serializable {
 
     public Cliente(Integer idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public Cliente(Integer idCliente, long cedula, String nombre, String apellidos, String direccion, String contrasena) {
+        this.idCliente = idCliente;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.direccion = direccion;
+        this.contrasena = contrasena;
     }
 
     public Integer getIdCliente() {
@@ -91,11 +100,11 @@ public class Cliente implements Serializable {
         this.idCliente = idCliente;
     }
 
-    public String getCedula() {
+    public long getCedula() {
         return cedula;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(long cedula) {
         this.cedula = cedula;
     }
 
@@ -107,11 +116,19 @@ public class Cliente implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getTelefono() {
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
 
@@ -129,15 +146,6 @@ public class Cliente implements Serializable {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    @XmlTransient
-    public List<Venta> getVentaList() {
-        return ventaList;
-    }
-
-    public void setVentaList(List<Venta> ventaList) {
-        this.ventaList = ventaList;
     }
 
     public TipoUsuario getTipo() {
@@ -171,14 +179,6 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "co.edu.consesionario.backend.entidades.Cliente[ idCliente=" + idCliente + " ]";
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
     
 }
