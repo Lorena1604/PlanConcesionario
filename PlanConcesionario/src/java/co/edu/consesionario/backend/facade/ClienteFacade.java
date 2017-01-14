@@ -35,9 +35,10 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFac
     public Cliente validarCliente(Cliente clienteRegistrado){
        Cliente cliente = null;
        String consulta;
+       Query query;
        try{
-         consulta = "FROM clientes c WHERE c.cedula =?1 and c.contrasena =guardarContrasena(?2)";
-         Query query = em.createQuery(consulta);
+         consulta = "FROM clientes c WHERE c.cedula = ?1 and c.contrasena = guardarContrasena(?2)";
+         query = em.createQuery(consulta);
          query.setParameter(1, clienteRegistrado.getCedula());
          query.setParameter(2, clienteRegistrado.getContrasena());
          

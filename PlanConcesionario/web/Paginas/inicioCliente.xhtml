@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>Lista Vehiculos</title>
+    </head>
+    <body>
+
+        <ui:composition template="./../Plantillas/plantillaUsuarios.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid columns="2">
+                    <p:outputLabel for="buscarPrecio" value="Ingrese precio: "/>
+                    <p:inputText id="buscarPrecio" value="#{vehiculoControlador.precioB}" required="true"/>
+                    <h:commandButton value="Buscar" action="#{vehiculoControlador.redireccion(precioB)}"/>
+                    </h:panelGrid>
+                </h:form>
+                
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
