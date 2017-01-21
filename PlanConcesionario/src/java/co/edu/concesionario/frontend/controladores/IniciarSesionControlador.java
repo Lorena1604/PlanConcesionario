@@ -77,13 +77,15 @@ public class IniciarSesionControlador implements Serializable{
         String redireccion = null;
          FacesContext context = FacesContext.getCurrentInstance();
         try{
-            cliente.setCedula(usuario);
-            cliente.setContrasena(contrasenaU);
+            cliente.setCedula(getUsuario());
+            cliente.setContrasena(getContrasenaU());
             clienteU = clienteFacade.validarCliente(cliente);
-            if (clienteU != null) {
-                redireccion = "registrarCliente";
-            }else {
+            if (clienteU == null) {
+                
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Usuario incorrecto"));
+                
+            }else {
+                redireccion = "registrarCliente";
             }
         }catch(Exception e){
             

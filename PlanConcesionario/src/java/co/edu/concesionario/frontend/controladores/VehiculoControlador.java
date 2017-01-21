@@ -11,6 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 @Named(value = "vehiculoControlador")
 @RequestScoped
@@ -27,16 +29,16 @@ public class VehiculoControlador {
     private Vehiculo vehiculo;
     private List<Estado> estado;
     private List<Vehiculo> vehiculos;
-    private Long precioB;
+    private int precioB;
 
     public VehiculoControlador() {
     }
 
-    public Long getPrecioB() {
+    public int getPrecioB() {
         return precioB;
     }
 
-    public void setPrecioB(Long precioB) {
+    public void setPrecioB(int precioB) {
         this.precioB = precioB;
     }
 
@@ -79,15 +81,20 @@ public class VehiculoControlador {
         vehiculo = new Vehiculo();
     }
     
-     public String redireccion(Long precio){
-         this.precioB = precio;
-        return "listarVehiculos";
+     public String redireccion(){
+        return "listaVehiculos";
     } 
 
     public List<Vehiculo> listaVehiculos() {
-        List<Vehiculo> listaPrecios = null;
-        vehiculos = vehiculoFacade.listaPrecios(precioB);
-        return listaPrecios;
+        List<Vehiculo> resultado=null;
+        FacesContext context = FacesContext.getCurrentInstance();
+        try{
+        resultado = vehiculoFacade.listaPrecios(getPrecioB());
+        setPrecioB(0);
+        }catch(Exception e){
+              context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "" + e.getMessage()));
+        }
+        return resultado;
     }
     
    

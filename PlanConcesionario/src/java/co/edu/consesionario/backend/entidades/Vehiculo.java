@@ -62,7 +62,7 @@ public class Vehiculo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "precio")
-    private long precio;
+    private int precio;
     @JoinColumn(name = "idConcesionario", referencedColumnName = "idConcesionario")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Concesionario idConcesionario;
@@ -77,7 +77,7 @@ public class Vehiculo implements Serializable {
         this.codigoVehiculo = codigoVehiculo;
     }
 
-    public Vehiculo(Integer codigoVehiculo, String placa, String marca, String modelo, long precio) {
+    public Vehiculo(Integer codigoVehiculo, String placa, String marca, String modelo, int precio) {
         this.codigoVehiculo = codigoVehiculo;
         this.placa = placa;
         this.marca = marca;
@@ -117,11 +117,11 @@ public class Vehiculo implements Serializable {
         this.modelo = modelo;
     }
 
-    public long getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(long precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 

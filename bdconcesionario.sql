@@ -24,17 +24,17 @@ DROP TABLE IF EXISTS `clientes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `clientes` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
-  `cedula` varchar(45) NOT NULL,
+  `cedula` bigint(20) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) NOT NULL,
+  `telefono` int(11) DEFAULT NULL,
+  `direccion` varchar(75) NOT NULL,
   `contrasena` varchar(45) NOT NULL,
   `tipo` int(11) DEFAULT NULL,
   PRIMARY KEY (`idCliente`),
   KEY `clienteTipoUsuario_idx` (`tipo`),
   CONSTRAINT `clienteTipoUsuario` FOREIGN KEY (`tipo`) REFERENCES `tipousuarios` (`idtipoUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'254716','Angie ','Ramirez','6521478','calle 52','???<}????B?o???u',2),(2,'214526','Gabriel','Gonzales','5412587','calle 63','?K?? ?X3SS?9V*',2);
+INSERT INTO `clientes` VALUES (1,254716,'Angie ','Ramirez',6521478,'calle 52','???<}????B?o???u',2),(2,214526,'Gabriel','Gonzales',5412587,'calle 63','?K?? ?X3SS?9V*',2),(3,123456,'Lorena','Forero Martinez',6587412,'calle 139','4	?p?Lr??\ZJ?=??',2),(4,355244,'Luis','Fernandez Torres',2547854,'calle 20','?=y??A?y??9 ',2),(5,145233,'Laura ','Forero Gomez',6587452,'calle 30','#??@??q}_?_?',2),(6,102545,'Mario','Camargo Ruiz',8745212,'calle 75','=????+>?c?Gc[k{',2);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,10 +56,10 @@ DROP TABLE IF EXISTS `concesionarios`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `concesionarios` (
   `idConcesionario` int(11) NOT NULL AUTO_INCREMENT,
-  `nit` int(11) NOT NULL,
+  `nit` bigint(20) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `telefono` varchar(25) NOT NULL,
-  `direccion` varchar(25) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `direccion` varchar(85) NOT NULL,
   `contrasena` varchar(45) NOT NULL,
   `tipoUsuario` int(11) NOT NULL,
   PRIMARY KEY (`idConcesionario`),
@@ -74,7 +74,7 @@ CREATE TABLE `concesionarios` (
 
 LOCK TABLES `concesionarios` WRITE;
 /*!40000 ALTER TABLE `concesionarios` DISABLE KEYS */;
-INSERT INTO `concesionarios` VALUES (1,214521,'Ultracar','2154785','calle 20','?y?^?1hF???',1),(2,915478,'Carmax','5214587','calle 98','nZX????oS??d',1),(3,548745,'Madiaautos','5124784','calle 10','???9e?????c??',1),(4,226369,'Karam','2014587','calle 96','D?HS?????&?_Ln',1),(5,845745,'Alemautos','9587454','calle 90','?%o???j?z5??&?f',1);
+INSERT INTO `concesionarios` VALUES (1,214521,'Ultracar',2154785,'calle 20','?y?^?1hF???',1),(2,915478,'Carmax',5214587,'calle 98','nZX????oS??d',1),(3,548745,'Madiaautos',5124784,'calle 10','???9e?????c??',1),(4,226369,'Karam',2014587,'calle 96','D?HS?????&?_Ln',1),(5,845745,'Alemautos',9587454,'calle 90','?%o???j?z5??&?f',1);
 /*!40000 ALTER TABLE `concesionarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,6 +152,7 @@ CREATE TABLE `permisos` (
 
 LOCK TABLES `permisos` WRITE;
 /*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
+INSERT INTO `permisos` VALUES (1,'Lista de vehiculos','inicioCliente.xhtml');
 /*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,6 +203,7 @@ CREATE TABLE `usuariospermisos` (
 
 LOCK TABLES `usuariospermisos` WRITE;
 /*!40000 ALTER TABLE `usuariospermisos` DISABLE KEYS */;
+INSERT INTO `usuariospermisos` VALUES (2,1);
 /*!40000 ALTER TABLE `usuariospermisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,7 +219,7 @@ CREATE TABLE `vehiculos` (
   `placa` varchar(10) NOT NULL,
   `marca` varchar(25) NOT NULL,
   `modelo` varchar(95) NOT NULL,
-  `precio` bigint(20) NOT NULL,
+  `precio` int(11) NOT NULL,
   `idConcesionario` int(11) NOT NULL,
   `idEstado` int(11) NOT NULL,
   PRIMARY KEY (`codigoVehiculo`),
@@ -303,4 +305,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-08 13:12:29
+-- Dump completed on 2017-01-20 23:29:25

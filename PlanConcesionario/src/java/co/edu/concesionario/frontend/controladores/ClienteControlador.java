@@ -7,7 +7,8 @@ import javax.enterprise.context.RequestScoped;
 @Named(value = "clienteControlador")
 @RequestScoped
 public class ClienteControlador {
-
+    
+    
     public ClienteControlador() {
     }
     

@@ -56,7 +56,7 @@ public class Permiso implements Serializable {
     @JoinTable(name = "usuariospermisos", joinColumns = {
         @JoinColumn(name = "idPermiso", referencedColumnName = "idPermiso")}, inverseJoinColumns = {
         @JoinColumn(name = "idTipoUsuario", referencedColumnName = "idtipoUsuario")})
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<TipoUsuario> tipoUsuarioList;
 
     public Permiso() {

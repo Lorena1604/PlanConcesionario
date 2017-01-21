@@ -32,22 +32,19 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> implements Vehiculo
     }
     
     @Override
-    public List<Vehiculo> listaPrecios(Long precio){
+    public List<Vehiculo> listaPrecios(int precio){
         List<Vehiculo> vehiculo = null;
         String consulta;
         Query query;
         
         try{
-          consulta ="SELECT v.marca, v.modelo, v.precio, c.nombre, e.descripcion FROM vehiculos v "
-                  + "JOIN concesionarios c ON v.idConcesionario = c.idConcesionario "
-                  + "JOIN estados e ON v.idEstado = e.idEstado WHERE v.precio >= ?1";
+          consulta ="SELECT v.codigoVehiculo, v.placa, v.marca, v.modelo, v.precio, v.idConcesionario, v.idEstado FROM vehiculos v WHERE v.precio >= ? ORDER BY v.precio";
         
-          query = em.createQuery(consulta);
+          query = em.createNativeQuery(consulta,Vehiculo.class);  
           query.setParameter(1, precio);
           
-          List<Vehiculo> lista = query.getResultList();
-            if (!lista.isEmpty()) {
-                vehiculo = (List<Vehiculo>) lista.get(0);
+            if (query.getResultList().size()>0) {
+                vehiculo = query.getResultList();
             }
             
         }catch(Exception e){

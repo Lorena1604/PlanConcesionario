@@ -30,6 +30,6 @@ public interface VehiculoFacadeLocal {
 
     int count();
     
-    List<Vehiculo> listaPrecios(Long precio);
+    List<Vehiculo> listaPrecios(int precio);
     
 }

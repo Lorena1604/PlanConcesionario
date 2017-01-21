@@ -6,7 +6,9 @@
 package co.edu.consesionario.backend.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,10 +19,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Concesionario.findByDireccion", query = "SELECT c FROM Concesionario c WHERE c.direccion = :direccion"),
     @NamedQuery(name = "Concesionario.findByContrasena", query = "SELECT c FROM Concesionario c WHERE c.contrasena = :contrasena")})
 public class Concesionario implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConcesionario", fetch = FetchType.EAGER)
+    private List<Vehiculo> vehiculoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -167,6 +174,15 @@ public class Concesionario implements Serializable {
     @Override
     public String toString() {
         return "co.edu.consesionario.backend.entidades.Concesionario[ idConcesionario=" + idConcesionario + " ]";
+    }
+
+    @XmlTransient
+    public List<Vehiculo> getVehiculoList() {
+        return vehiculoList;
+    }
+
+    public void setVehiculoList(List<Vehiculo> vehiculoList) {
+        this.vehiculoList = vehiculoList;
     }
     
 }
