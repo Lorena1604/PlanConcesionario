@@ -32,14 +32,14 @@ public class ConcesionarioFacade extends AbstractFacade<Concesionario> implement
     }
     
     @Override
-    public Concesionario validarConcesionario(long nitU, String usuario){
+    public Concesionario validarConcesionario(Concesionario concesionarioRe){
      Concesionario concesionario = null;
      String consulta;
      try{
-        consulta = "FROM concesionario con WHERE con.nit = ?1 and con.nombre = guardarContrasena(?2)";
-        Query query = em.createQuery(consulta);
-        query.setParameter(1, nitU);
-        query.setParameter(2, usuario);
+        consulta = "SELECT idConcesionario, nit, nombre, telefono, direccion, contrasena, tipoUsuario FROM concesionarios con WHERE con.nit = ? and con.contrasena = guardarContrasena(?)";
+        Query query = em.createNativeQuery(consulta,Concesionario.class);
+        query.setParameter(1, concesionarioRe.getNit());
+        query.setParameter(2, concesionarioRe.getContrasena());
         
         List<Concesionario> listaCon = query.getResultList();
          if (!listaCon.isEmpty()) {

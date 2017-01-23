@@ -37,8 +37,8 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements ClienteFac
        String consulta;
        Query query;
        try{
-         consulta = "FROM clientes c WHERE c.cedula = ?1 and c.contrasena = guardarContrasena(?2)";
-         query = em.createQuery(consulta);
+         consulta = "SELECT idCliente, cedula, nombre, apellidos, telefono, direccion, contrasena, tipo FROM clientes c WHERE c.cedula = ? and c.contrasena = guardarContrasena(?)";
+         query = em.createNativeQuery(consulta,Cliente.class);
          query.setParameter(1, clienteRegistrado.getCedula());
          query.setParameter(2, clienteRegistrado.getContrasena());
          

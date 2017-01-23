@@ -30,6 +30,6 @@ public interface ConcesionarioFacadeLocal {
 
     int count();
     
-    Concesionario validarConcesionario(long nitU, String usuario);
+    Concesionario validarConcesionario(Concesionario concesionarioRe);
     
 }
