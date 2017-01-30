@@ -8,16 +8,16 @@
 
     <body>
 
-        <ui:composition template="./../Plantillas/plantillaUsuarios.xhtml">
+        <ui:composition template="./../Plantillas/plantillaCliente.xhtml">
 
             <ui:define name="content">
                 <f:view>
                     <p:messages autoUpdate="true"/>
-                 <h:form>
-                        <h1><h:outputText value="Lista de vehiculos"/></h1>
-                        <p:dataTable value="#{vehiculoControlador.listaVehiculos()}" var="vehi">
-                          
-                           
+                    <h:form>
+
+                        <h1><h:outputText value="Lista de vehiculos disponibles"/></h1>
+                        <p:dataTable id="tbConsulta" value="#{vehiculoControlador.listaVehiculos()}" var="vehi" paginator="true" paginatorPosition="bottom" rows="10" >
+
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="Placa"/>
@@ -55,11 +55,24 @@
                                 <h:outputText value="#{vehi.idEstado.descripcion}"/>
                             </p:column>
                         </p:dataTable>
+                         <h3>Exportar: </h3>
+                        <h:commandLink>
+                            <h:graphicImage url="../img/pdf.png" width="5%" title="Exportar consulta en PDF"/>
+                            <p:dataExporter type="pdf" target="tbConsulta" fileName="Vehiculos consultados"/>
+                        </h:commandLink>
+                       
+                        <h:commandLink>
+                            <h:graphicImage url="../img/excel.png" width="5%" title="Exportar consulta en documento excel"/>
+                            <p:dataExporter type="xls" target="tbConsulta" fileName="Vehiculos consultados"/>
+                        </h:commandLink>
                         <p:separator/>
-                        <p:commandButton value="Atrás" action="inicioCliente"/>
+                        <p:commandButton class="boton" value="Atrás" action="inicioCliente"/>
+                        <p:separator/>
                     </h:form>
+
+
                 </f:view>
-                
+
             </ui:define>
 
         </ui:composition>

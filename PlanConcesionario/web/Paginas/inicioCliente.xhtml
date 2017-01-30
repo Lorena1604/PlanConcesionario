@@ -8,7 +8,7 @@
   
     <body>
 
-        <ui:composition template="./../Plantillas/plantillaUsuarios.xhtml">
+        <ui:composition template="./../Plantillas/plantillaCliente.xhtml">
 
             <ui:define name="content">
                 <h:form>
@@ -16,7 +16,7 @@
                     <h:panelGrid columns="2">
                     <p:outputLabel for="buscarPrecio" value="Ingrese precio: "/>
                     <p:inputText id="buscarPrecio" value="#{vehiculoControlador.precioB}" required="true" requiredMessage="Ingrese un precio"/>
-                    <p:commandButton value="Buscar" action="#{vehiculoControlador.redireccion()}"/>
+                    <p:commandButton class="boton" value="Buscar" action="#{vehiculoControlador.redireccion()}"/>
                     </h:panelGrid>
                 </h:form>
                 <p:separator/>
@@ -25,7 +25,7 @@
 
                     <h:form>
                         <h1><h:outputText value="Lista de vehiculos"/></h1>
-                        <p:dataTable value="#{vehiculoControlador.vehiculos}" var="item">
+                        <p:dataTable id="listaVehi" value="#{vehiculoControlador.vehiculos}" var="item" paginator="true" paginatorPosition="bottom" rows="8">
                           
                             <p:column>
                                 <f:facet name="header">
@@ -64,6 +64,18 @@
                                 <h:outputText value="#{item.idEstado.descripcion}"/>
                             </p:column>
                         </p:dataTable>
+                         <h3>Exportar: </h3>
+                        <h:commandLink>
+                            <h:graphicImage url="../img/pdf.png" width="5%" title="Exportar consulta en PDF"/>
+                            <p:dataExporter type="pdf" target="listaVehi" fileName="Lista Vehiculos"/>
+                        </h:commandLink>
+                       
+                        <h:commandLink>
+                            <h:graphicImage url="../img/excel.png" width="5%" title="Exportar consulta en documento excel"/>
+                            <p:dataExporter type="xls" target="listaVehi" fileName="Lista Vehiculos"/>
+                        </h:commandLink>
+                        <p:separator/>
+                        <p:commandButton class="boton" value="Atrás" action="inicioCliente"/>
                     </h:form>
                 </f:view>
 

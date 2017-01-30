@@ -21,8 +21,6 @@ public class VehiculoControlador {
     @EJB
     private VehiculoFacadeLocal vehiculoFacade;
     @EJB
-    private ConcesionarioFacadeLocal concesionarioFacade;
-    @EJB
     private EstadoFacadeLocal estadoFacade;
 
     private Concesionario concesionario;
@@ -82,7 +80,7 @@ public class VehiculoControlador {
     }
     
      public String redireccion(){
-        return "listaVehiculos";
+        return "listaVehiculos?faces-redirect=true";
     } 
 
     public List<Vehiculo> listaVehiculos() {

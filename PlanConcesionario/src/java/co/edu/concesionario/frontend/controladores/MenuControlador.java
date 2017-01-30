@@ -1,6 +1,8 @@
 
 package co.edu.concesionario.frontend.controladores;
 
+import co.edu.consesionario.backend.entidades.Cliente;
+import co.edu.consesionario.backend.entidades.Concesionario;
 import co.edu.consesionario.backend.entidades.Permiso;
 import co.edu.consesionario.backend.facade.PermisoFacadeLocal;
 import java.io.Serializable;
@@ -8,6 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
@@ -50,9 +53,16 @@ public class MenuControlador implements Serializable{
     }
     
     public void establecerPermisos(){
-        listaPermisos.stream().filter((m) -> (m != null)).map((m) -> new DefaultMenuItem(m.getNombre())).forEach((menuC) -> {
-            menuC.setUrl(menuC.getUrl());
-            modelo.addElement(menuC);
-        });
+        Cliente cliente;
+        FacesContext context = FacesContext.getCurrentInstance();
+        
+        for (Permiso per : listaPermisos) {
+            cliente = (Cliente) context.getExternalContext().getSessionMap().get("Cliente");
+            if (per != null && per.getIdTipoUsuario().equals(cliente.getTipo())) {
+               DefaultMenuItem menu = new DefaultMenuItem(per.getNombre());
+               menu.setUrl(per.getUrlPermiso());
+               modelo.addElement(menu);
+            }
+        }
     }
 }

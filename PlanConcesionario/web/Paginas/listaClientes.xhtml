@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../Plantillas/plantillaUsuarios.xhtml">
+        <ui:composition template="./../Plantillas/plantillaConcesionario.xhtml">
 
             <ui:define name="content">
                
@@ -17,13 +17,8 @@
 
                     <h:form>
                         <h1><h:outputText value="Lista de clientes"/></h1>
-                        <p:dataTable value="#{clienteControlador.listaClientes}" var="item">
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="IdCliente"/>
-                                </f:facet>
-                                <h:outputText value="#{item.idCliente}"/>
-                            </p:column>
+                        <p:dataTable value="#{clienteControlador.listaClientes}" var="item" paginator="true">
+                        
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="Cedula"/>

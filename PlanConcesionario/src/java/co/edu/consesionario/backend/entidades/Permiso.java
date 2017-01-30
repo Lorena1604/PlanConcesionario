@@ -6,22 +6,19 @@
 package co.edu.consesionario.backend.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -53,11 +50,9 @@ public class Permiso implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "urlPermiso")
     private String urlPermiso;
-    @JoinTable(name = "usuariospermisos", joinColumns = {
-        @JoinColumn(name = "idPermiso", referencedColumnName = "idPermiso")}, inverseJoinColumns = {
-        @JoinColumn(name = "idTipoUsuario", referencedColumnName = "idtipoUsuario")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<TipoUsuario> tipoUsuarioList;
+    @JoinColumn(name = "idTipoUsuario", referencedColumnName = "idtipoUsuario")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private TipoUsuario idTipoUsuario;
 
     public Permiso() {
     }
@@ -96,13 +91,12 @@ public class Permiso implements Serializable {
         this.urlPermiso = urlPermiso;
     }
 
-    @XmlTransient
-    public List<TipoUsuario> getTipoUsuarioList() {
-        return tipoUsuarioList;
+    public TipoUsuario getIdTipoUsuario() {
+        return idTipoUsuario;
     }
 
-    public void setTipoUsuarioList(List<TipoUsuario> tipoUsuarioList) {
-        this.tipoUsuarioList = tipoUsuarioList;
+    public void setIdTipoUsuario(TipoUsuario idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
     }
 
     @Override

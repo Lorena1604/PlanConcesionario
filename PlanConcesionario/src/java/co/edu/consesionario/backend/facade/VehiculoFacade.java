@@ -38,7 +38,7 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> implements Vehiculo
         Query query;
         
         try{
-          consulta ="SELECT v.codigoVehiculo, v.placa, v.marca, v.modelo, v.precio, v.idConcesionario, v.idEstado FROM vehiculos v WHERE v.precio >= ? ORDER BY v.precio";
+          consulta ="SELECT v.codigoVehiculo, v.placa, v.marca, v.modelo, v.precio, v.idConcesionario, v.idEstado FROM vehiculos v WHERE v.precio >= ? AND v.idEstado = 1 ORDER BY v.precio";
         
           query = em.createNativeQuery(consulta,Vehiculo.class);  
           query.setParameter(1, precio);

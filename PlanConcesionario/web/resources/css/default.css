@@ -1,13 +1,13 @@
 body {
     background-color: #ffffff;
     font-size: 12px;
-    font-family:"Lucida Grande CE";
+    font-family:"Nueva Std";
     color: #000000;  
     margin: 10px;
 }
 
 h1 {
-    font-family:"Lucida Grande CE";
+    font-family:"Nueva Std";
     font-size:  26px;
     font-weight: bold;
     margin: 0px;
@@ -26,4 +26,31 @@ a:link:hover, a:visited:hover  {
   color: #045491;
   font-weight : bold;
   text-decoration : underline;
+}
+
+.permisos{
+    text-align: center;
+    font-family: "Nueva Std";
+    font-size: 25px;
+}
+.divPermisos{
+    margin-top: 20%;
+}
+
+.boton{
+    font-family: "Nueva Std";
+    font-size: 15px;
+    background-color: orange;
+    color: #000;
+}
+
+.botonCerrarSesion{
+    font-size: 15px;
+    font-family: "Nueva Std";
+    background-color: aliceblue;
+    color:#000;
+}
+
+.separador{
+    background-color: aqua;
 }

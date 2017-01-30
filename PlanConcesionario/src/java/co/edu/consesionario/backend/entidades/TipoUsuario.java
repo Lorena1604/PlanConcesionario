@@ -8,14 +8,12 @@ package co.edu.consesionario.backend.entidades;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -46,12 +44,8 @@ public class TipoUsuario implements Serializable {
     @Size(max = 25)
     @Column(name = "descripcion")
     private String descripcion;
-    @ManyToMany(mappedBy = "tipoUsuarioList", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idTipoUsuario", fetch = FetchType.EAGER)
     private List<Permiso> permisoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoUsuario", fetch = FetchType.EAGER)
-    private List<Concesionario> concesionarioList;
-    @OneToMany(mappedBy = "tipo", fetch = FetchType.EAGER)
-    private List<Cliente> clienteList;
 
     public TipoUsuario() {
     }
@@ -83,24 +77,6 @@ public class TipoUsuario implements Serializable {
 
     public void setPermisoList(List<Permiso> permisoList) {
         this.permisoList = permisoList;
-    }
-
-    @XmlTransient
-    public List<Concesionario> getConcesionarioList() {
-        return concesionarioList;
-    }
-
-    public void setConcesionarioList(List<Concesionario> concesionarioList) {
-        this.concesionarioList = concesionarioList;
-    }
-
-    @XmlTransient
-    public List<Cliente> getClienteList() {
-        return clienteList;
-    }
-
-    public void setClienteList(List<Cliente> clienteList) {
-        this.clienteList = clienteList;
     }
 
     @Override
